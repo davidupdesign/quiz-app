@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap");
+    </style>
+    <link rel="stylesheet" href="app.css" />
+    <title>Quiz App</title>
+  </head>
+
+  <body>
+    <div class="start-screen">
+      <h1>Quiz App</h1>
+      <p>Press the Start Button to take the quiz.</p>
+      <button id="start-btn">Start</button>
+    </div>
+
+    <div class="quiz-screen hidden">
+      <p id="question-p">question</p>
+      <button class="answer-btn">Answer 1</button>
+      <button class="answer-btn">Answer 2</button>
+      <button class="answer-btn">Answer 3</button>
+      <button class="answer-btn">Answer 4</button>
+      <p id="progress-bar">Question 1/5</p>
+    </div>
+
+    <div class="end-screen hidden">
+      <h1>Your Results:</h1>
+      <p id="pass-fail-msg">pass or fail</p>
+      <p id="score">the score</p>
+      <p id="time-spent">time spent:</p>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
