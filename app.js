@@ -10,6 +10,12 @@ const answerBtns = document.querySelectorAll(".answer-btn");
 const scoreP = document.getElementById("score");
 const passFailMsg = document.getElementById("pass-fail-msg");
 
+const timeSpent = document.getElementById("time-spent");
+
+const progressBar = document.getElementById("progress-bar");
+
+const tryAgainBtn = document.getElementById("try-again");
+
 const API_URL =
   "https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple";
 
@@ -19,18 +25,26 @@ let quizData = [];
 let startTime;
 
 startBtn.addEventListener("click", startQuiz);
+answerBtns.forEach((answer) => {
+  answer.addEventListener("click", selectAnswer);
+});
+
+function fetchQuestions() {
+  fetch(API_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      quizData = data.results;
+    });
+}
+
+fetchQuestions();
 
 function startQuiz() {
   startScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
 
-  fetch(API_URL)
-    .then((response) => response.json())
-    .then((data) => {
-      quizData = data.results;
-      displayQuestion();
-      console.log(quizData);
-    });
+  startTime = Date.now();
+  displayQuestion();
 }
 
 function shuffle(array) {
@@ -55,11 +69,9 @@ function displayQuestion() {
     answerBtns[index].textContent = answer;
   });
 
-  answerBtns.forEach((answer) => {
-    answer.addEventListener("click", selectAnswer);
-  });
-
-  console.log(answers);
+  progressBar.textContent = `Question ${currentQuestionIndex + 1}/${
+    quizData.length
+  }`;
 }
 
 function selectAnswer(e) {
@@ -93,4 +105,20 @@ function showResults() {
   } else {
     passFailMsg.textContent = "Failed";
   }
+
+  const endTime = Date.now();
+  const elapsedTime = Math.floor((endTime - startTime) / 1000);
+
+  timeSpent.textContent = `Time spent: ${elapsedTime} secs `;
+
+  tryAgainBtn.addEventListener("click", restartQuiz);
+}
+
+function restartQuiz() {
+  score - 0;
+  currentQuestionIndex = 0;
+
+  endScreen.classList.add("hidden");
+  startScreen.classList.remove("hidden");
+  fetchQuestions();
 }
