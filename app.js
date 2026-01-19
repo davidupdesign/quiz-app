@@ -115,7 +115,7 @@ function showResults() {
 }
 
 function restartQuiz() {
-  score - 0;
+  score = 0;
   currentQuestionIndex = 0;
 
   endScreen.classList.add("hidden");
